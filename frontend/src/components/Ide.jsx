@@ -57,7 +57,6 @@ function Ide({ code, setCode, errors, options }) {
     useEffect(() => {
         if (!monaco) return;
         const model = monaco.editor.getModels()[0];
-        console.log('rev', errors);
         const currentMarkers = errors.map(error => {
             return {
                 severity: severityHandler(error.type),
@@ -68,7 +67,6 @@ function Ide({ code, setCode, errors, options }) {
                 endLineNumber: error.location.line,
             };
         });
-        console.log('lus', currentMarkers);
         monaco.editor.setModelMarkers(model, "owner", currentMarkers);
     }, [errors]);
 

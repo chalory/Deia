@@ -17,7 +17,10 @@ def hello_world():
 def chapters(id=None):
     all_chapters = Chapters.ALL_CHAPTERS
     if id is None and request.method == "GET":
-        return jsonify({"chapters": list(all_chapters.keys())})
+        chapters_list = {}
+        for key, value in all_chapters.items():
+            chapters_list[value.__class__.__name__] = key
+        return jsonify({"chapters": chapters_list})
     if not id in all_chapters.keys():
         message = {"type": "error", "messages": "Invalid chapter id"}
         return jsonify(message), 400

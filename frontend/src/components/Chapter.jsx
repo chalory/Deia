@@ -1,14 +1,18 @@
 import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 import useChapter from '../hooks/useChapter';
 import IdeWrapper from './IdeWrapper';
 
-function Chapter({ id }) {
+function Chapter() {
+    let { id } = useParams();
+    console.log(id);
+
     const [data, errors, verify] = useChapter(id);
     return (
         <div className="w-[100vw] h-[100vh] flex p-2">
             <div className="flex flex-col w-[30%] h-full border-r border-r-slate-700">
-                <p>Chapter 1</p>
-                <p>Chapter 2</p>
+                <Link to="/chapter/getlink">Chapter 1 (Get Link)</Link>
+                <Link to="/chapter/getalttext">Chapter 2 (Get alt text)</Link>
             </div>
             <div className="grow">
                 <div>

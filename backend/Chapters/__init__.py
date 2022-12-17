@@ -1,3 +1,4 @@
-from . import GetAltText
+from . import GetAltText, getlink
 
-ALL_CHAPTERS = {"getalttext": GetAltText.GetAltText()}
+ALL_CHAPTERS = {"getalttext": GetAltText.GetAltText(), "getlink": getlink.GetAltText()}
+

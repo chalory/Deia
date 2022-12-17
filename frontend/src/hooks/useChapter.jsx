@@ -9,7 +9,7 @@ function useChapter(chapterId) {
             const { data: response } = await axios.get(`http://localhost:5000/chapters/${chapterId}`);
             setData(response);
         })();
-    }, [setData]);
+    }, [setData, chapterId]);
     const verify = async (code) => {
         try {
             const response = await axios.post(`http://127.0.0.1:5000/chapters/${chapterId}`, {
