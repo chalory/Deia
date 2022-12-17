@@ -1,7 +1,7 @@
 import Editor, { useMonaco } from '@monaco-editor/react';
 import { emmetHTML, emmetCSS } from 'emmet-monaco-es';
 import React, { useEffect, useRef } from 'react';
-
+/* eslint-disable */
 /**
  * @typedef {Parameters<import('@monaco-editor/react').OnMount>} OnMountFuncn
  * @typedef {import('react/index').MutableRefObject<OnMountFuncn[0] | null>} EditorObj
