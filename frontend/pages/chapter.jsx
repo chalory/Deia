@@ -1,10 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { useEffect, useState } from 'react';
-import IdeWrapper from '../src/components/IdeWrapper';
-import axios from 'axios';
 import Chapter from '../src/components/Chapter';
-import App from '../src/components/Test';
 
 export default function IDE() {
     const defaultText = `<!DOCTYPE html>
