@@ -1,9 +1,29 @@
 import Head from 'next/head';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import HTMLIde from '../src/components/HTMLIde';
 
 export default function IDE() {
     const [content, setContent] = useState('');
+    const getErrors = (content, monaco) => {
+        return [
+            {
+                startLineNumber: 5,
+                // startColumn: 17,
+                endLineNumber: 5,
+                endColumn: 24,
+                message: 'Warning!',
+                severity: monaco.MarkerSeverity.Warning
+            },
+            {
+                startLineNumber: 6,
+                // startColumn: 18,
+                endLineNumber: 6,
+                endColumn: 23,
+                message: 'Erorr!',
+                severity: monaco.MarkerSeverity.Error
+            }];
+    };
     useEffect(() => {
         setContent(`<!DOCTYPE html>
         <html lang="en">
@@ -30,7 +50,11 @@ export default function IDE() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <HTMLIde content={content} setContent={setContent}></HTMLIde>
+            <div style={{ width: '100%', display: 'flex', justifyContent: "end" }}>
+                <div style={{ width: "60%" }}>
+                    <HTMLIde initialContent={content} getErrors={getErrors}></HTMLIde>
+                </div>
+            </div>
         </>
     );
 }
