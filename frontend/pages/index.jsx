@@ -1,28 +1,25 @@
 import Head from 'next/head';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import HTMLIde from '../src/components/HTMLIde';
+import IdeWrapper from '../src/components/IdeWrapper';
+import axios from 'axios';
 
 export default function IDE() {
     const [content, setContent] = useState('');
+    const [errors, setErrors] = useState([]);
     const getErrors = (content, monaco) => {
-        return [
-            {
-                startLineNumber: 5,
-                // startColumn: 17,
-                endLineNumber: 5,
-                endColumn: 24,
-                message: 'Warning!',
-                severity: monaco.MarkerSeverity.Warning
-            },
-            {
-                startLineNumber: 6,
-                // startColumn: 18,
-                endLineNumber: 6,
-                endColumn: 23,
-                message: 'Erorr!',
-                severity: monaco.MarkerSeverity.Error
-            }];
+        const chapter = "getalttext";
+        axios.post('http://127.0.0.1:5000/chapters/getalttext', {
+            code: content,
+        }).then(
+            ({ data }) => {
+                if (data.type === 'error') {
+                    setErrors(data.messages);
+                }
+                else {
+                    setErrors([]);
+                }
+            }).catch(console.error);
     };
     useEffect(() => {
         setContent(`<!DOCTYPE html>
@@ -52,7 +49,7 @@ export default function IDE() {
             </Head>
             <div style={{ width: '100%', display: 'flex', justifyContent: "end" }}>
                 <div style={{ width: "60%" }}>
-                    <HTMLIde initialContent={content} getErrors={getErrors}></HTMLIde>
+                    <IdeWrapper initialContent={content} getErrors={getErrors} errors={errors}></IdeWrapper>
                 </div>
             </div>
         </>
