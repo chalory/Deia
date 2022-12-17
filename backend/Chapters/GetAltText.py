@@ -4,6 +4,7 @@ from .Chapter import Chapter
 
 class GetAltText(Chapter):
     def __init__(self):
+        super().__init__()
         self.prompt = "You should add alt tags to all texts"
         self.code = """
             <img src="">
@@ -25,6 +26,7 @@ class GetAltText(Chapter):
                             "line": tag.sourceline,
                             "position": tag.sourcepos,
                         },
+                        "message": "Add alt attributes to images",
                     }
                 )
         if len(messages) == 0:
