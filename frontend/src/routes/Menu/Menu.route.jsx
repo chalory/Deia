@@ -117,7 +117,7 @@ const Menu = () => {
                 </Link>
             </div>
             <div className="menu__link">
-                <Link to="/dyslexia/dyslexia1" className="button">
+                <Link to="/dyslexia/introduction" className="button">
                     <span className="shadow">{linkText2}</span>
                     <span className="clone" hidden>
                         <Letter />
