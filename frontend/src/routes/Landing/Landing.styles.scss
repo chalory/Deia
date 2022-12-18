@@ -1,0 +1,129 @@
+.landing {
+    @keyframes colorize {
+        0% {
+            color: #909;
+        }
+        100% {
+            color: #e00;
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes removeLetters {
+        0% {
+            max-width: 8vw;
+        }
+        100% {
+            max-width: 0;
+        }
+    }
+
+    @keyframes addMargin {
+        0% {
+            margin: 0 0;
+        }
+        100% {
+            margin: 0 5vw;
+        }
+    }
+
+    @keyframes numbersUp {
+        0% {
+            transform: translate(-50%, 100%);
+        }
+        100% {
+            transform: translate(-50%, -3%);
+        }
+    }
+
+    @keyframes lineGrow {
+        0% {
+            width: 0%;
+        }
+        100% {
+            width: 84%;
+        }
+    }
+
+    @keyframes numberUpdate {
+        0% {
+            content: "";
+        }
+
+        @for $i from 1 through 10 {
+            #{$i * 9}% {
+                content: "#{$i}";
+            }
+        }
+        100% {
+            content: "11";
+        }
+    }
+
+    div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+    }
+
+    div::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 0%;
+        left: 50%;
+        border-bottom: 0.5vw solid #505;
+        transform: translate(-50%, 50%);
+        animation: lineGrow 1s, fadeOut 1s linear;
+        animation-delay: 1s, 8s;
+        animation-fill-mode: forwards;
+    }
+
+    div::after {
+        content: "";
+        font-size: 8vw;
+        font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
+        color: #909;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        animation: numberUpdate 5.5s steps(11, end), numbersUp 0.75s linear;
+        animation-delay: 2s, 9s;
+        animation-fill-mode: forwards;
+    }
+
+    span {
+        font-size: 8vw;
+        font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
+        color: #909;
+        display: inline-block;
+        overflow: hidden;
+        max-width: 8vw;
+    }
+
+    @for $i from 2 through 12 {
+        div span:nth-child(#{$i}) {
+            animation: colorize 1s, fadeOut 1s linear, removeLetters 0.75s linear;
+            animation-delay: #{$i/2 + 1}s, 8s, 9s;
+            animation-fill-mode: forwards;
+        }
+    }
+
+    div span:first-child,
+    div span:last-child {
+        animation: addMargin 0.5s;
+        animation-delay: 9s;
+        animation-fill-mode: forwards;
+    }
+}

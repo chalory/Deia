@@ -1,6 +1,6 @@
-import Editor, { useMonaco } from '@monaco-editor/react';
-import { emmetHTML, emmetCSS } from 'emmet-monaco-es';
-import React, { useEffect, useRef } from 'react';
+import Editor, { useMonaco } from "@monaco-editor/react";
+import { emmetHTML, emmetCSS } from "emmet-monaco-es";
+import React, { useEffect, useRef } from "react";
 /* eslint-disable */
 /**
  * @typedef {Parameters<import('@monaco-editor/react').OnMount>} OnMountFuncn
@@ -33,21 +33,21 @@ function Ide({ code, setCode, errors, options }) {
     /**
      * @param {string} severity
      */
-    const severityHandler = (severity) => {
+    const severityHandler = severity => {
         if (!monaco) {
             return 8;
         }
         switch (severity.toLowerCase()) {
-            case 'error': {
+            case "error": {
                 return monaco.MarkerSeverity.Error;
             }
-            case 'info': {
+            case "info": {
                 return monaco.MarkerSeverity.Info;
             }
-            case 'warning': {
+            case "warning": {
                 return monaco.MarkerSeverity.Warning;
             }
-            case 'hint': {
+            case "hint": {
                 return monaco.MarkerSeverity.Hint;
             }
             default:
@@ -58,36 +58,45 @@ function Ide({ code, setCode, errors, options }) {
         if (!monaco) return;
         const model = monaco.editor.getModels()[0];
         const currentMarkers = errors.map(error => {
+            const startPosition = new monaco.Position(error.location.line, 1);
+            // https://stackoverflow.com/questions/64279599/regex-for-replacing-spaces-not-between-quotation-marks
+            const toSearch = error.data.replace(
+                /("[^"\\]*(?:\\.[^"\\]*)*"|'[^'\\]*(?:\\.[^'\\]*)*')|\s+/g,
+                (x, y) => y || "[\\n\\t ]+"
+            );
+            const match = model.findNextMatch(toSearch, startPosition, true, true, null, false);
+            console.log(match, toSearch);
             return {
                 severity: severityHandler(error.type),
                 message: error.message,
-                startColumn: model.getLineMinColumn(error.location.line),
-                startLineNumber: error.location.line,
-                endColumn: model.getLineMaxColumn(error.location.line) - 1,
-                endLineNumber: error.location.line,
+                startColumn:
+                    match?.range.startColumn || model.getLineMinColumn(error.location.line),
+                startLineNumber: match?.range.startLineNumber || error.location.line,
+                endColumn:
+                    match?.range.endColumn || model.getLineMaxColumn(error.location.line) - 1,
+                endLineNumber: match?.range.endLineNumber || error.location.line,
             };
         });
         monaco.editor.setModelMarkers(model, "owner", currentMarkers);
-    }, [errors]);
+    }, [errors, monaco]);
 
     const formatDocument = () => {
         if (!editorRef.current) return;
         editorRef.current.getAction("editor.action.formatDocument").run();
     };
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            formatDocument();
-        }, 15000);
-        return () => clearTimeout(timer);
-    }, [editorRef]);
-
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         formatDocument();
+    //     }, 15000);
+    //     return () => clearTimeout(timer);
+    // }, [editorRef]);
 
     const handleBlur = () => {
-        formatDocument();
+        // formatDocument();
     };
 
-    const handleChange = (value) => {
+    const handleChange = value => {
         if (!monaco) return;
         const model = monaco.editor.getModels()[0];
         setCode(model.getValue());
@@ -97,18 +106,18 @@ function Ide({ code, setCode, errors, options }) {
         <Editor
             width="100%"
             height="100%"
-            className='rounded-md'
+            className="rounded-md"
             defaultLanguage="html"
             onMount={handleEditorDidMount}
             value={code}
             onChange={handleChange}
-            theme={'vs-dark'}
+            theme={"vs-dark"}
             options={{
-                "automaticLayout": true,
-                "colorDecorators": true,
-                "formatOnPaste": true,
-                "formatOnType": true,
-                "mouseWheelZoom": true,
+                automaticLayout: true,
+                colorDecorators: true,
+                formatOnPaste: true,
+                formatOnType: true,
+                mouseWheelZoom: true,
                 ...options,
             }}
             wrapperProps={{ onBlur: handleBlur }}

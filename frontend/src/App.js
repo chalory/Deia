@@ -1,10 +1,10 @@
 import IdeWrapper from "./components/IdeWrapper";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Menu from "./components/menu.route";
-import Landing from "./components/landing.route";
-
 import Chapter from "./components/Chapter/Chapter";
+
+import Landing from "./routes/Landing/Landing.route";
+import Menu from "./routes/Menu/Menu.route";
 
 function App() {
     return (
@@ -13,7 +13,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />}></Route>
                     <Route path="/menu" element={<Menu />}></Route>
-                    <Route path="/chapter/:id" element={<Chapter />}></Route>
+                    <Route path="/chapters/:id" element={<Chapter />}></Route>
                 </Routes>
             </Router>
         </div>

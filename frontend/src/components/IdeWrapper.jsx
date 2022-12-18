@@ -26,16 +26,23 @@ function IdeWrapper({ initialCode, errors, updateErrors }) {
         setCode(initialCode);
     }, [initialCode]);
 
+    useEffect(() => {
+        if (!updateErrors) return;
+        updateErrors(code);
+    }, [updateErrors, code]);
     return (
-        <div className="flex flex-col items-stretch gap-4 h-full rounded-lg">
-            <div className="flex align-bottom gap-2">
-                <button
-                    onClick={e => updateErrors(code)}
-                    className="bg-green-500 ml-auto p-2 rounded-md inline-flex items-center"
-                >
-                    <RiPlayLine className="text-xl mr-1 text-white" />
-                    Run
-                </button>
+        <div className="flex  flex-col items-stretch gap-4 h-full">
+            {" "}
+            <div className="flex justify-end align-bottom gap-2" mb-2>
+                {updateErrors && (
+                    <button
+                        onClick={e => updateErrors(code)}
+                        className="bg-green-500 ml-auto p-2 rounded-md inline-flex items-center"
+                    >
+                        <RiPlayLine className="text-xl mr-1 text-white" />
+                        Run
+                    </button>
+                )}
                 <Options toggleWordWrap={toggleWordWrap} />
             </div>
             <div onBlur={() => ""} className="h-full">
