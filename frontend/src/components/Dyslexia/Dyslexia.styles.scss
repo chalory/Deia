@@ -1,0 +1,276 @@
+.dyslexia {
+    background-color: #16171b;
+    max-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    padding: 1rem;
+    color: #fff;
+
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        // &__title {
+        //     background-color: #28282e;
+        //     border-radius: 0.5rem;
+        //     padding: 0.75rem 1.15rem;
+        //     width: fit-content;
+        //     display: flex;
+        //     align-items: center;
+        //     gap: 0.5rem;
+        // }
+
+        .dropdown {
+            color: #000;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            &__link {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                background-color: #414148;
+                border-radius: 0.5rem;
+                padding: 0.75rem 1.15rem;
+                width: fit-content;
+                transition: all 0.2s ease-in-out;
+
+                svg {
+                    font-size: 1.5rem;
+                }
+
+                &:hover {
+                    filter: brightness(1.15);
+                }
+            }
+
+            &__prev {
+                border: 1px solid #414148;
+                background-color: transparent;
+                svg {
+                    font-size: 1rem;
+                }
+
+                &:hover {
+                    background-color: #414148;
+                }
+            }
+        }
+    }
+
+    .heading {
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .problem-title {
+            text-transform: capitalize;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            svg {
+                font-size: 1.5rem;
+            }
+        }
+
+        .stats {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: #c9c9c9;
+            font-size: 0.9rem;
+            font-weight: 400;
+
+            &__stat {
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+
+                svg {
+                    font-size: 1.25rem;
+                }
+            }
+
+            &__value {
+                font-weight: 600;
+            }
+        }
+
+        .nav {
+            margin-top: 1rem;
+
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            &__item {
+                font-size: 0.85rem;
+                border-radius: 0.5rem;
+                padding: 0.5rem 0.8rem;
+
+                &.active {
+                    background-color: #252629;
+                }
+
+                &:hover {
+                    background-color: #252629;
+                }
+            }
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            a {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                border: 1px solid #333;
+                padding: 0.7rem 1.25rem;
+                border-radius: 0.25rem;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #414148;
+                }
+            }
+        }
+    }
+
+    .layout {
+        display: flex;
+        align-items: stretch;
+        height: 100%;
+        gap: 2rem;
+    }
+
+    .left {
+        margin-top: 1rem;
+        width: 50%;
+        height: 100%;
+
+        .instructions {
+            background-color: #222327;
+            padding: 1.5rem 1rem;
+            border-radius: 0.5rem;
+            height: 100%;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            height: 80%;
+            overflow-y: auto;
+        }
+
+        .tags {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+
+            svg {
+                font-size: 1.35rem;
+            }
+
+            ul {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            &__tag {
+                background-color: #1f1f23;
+                padding: 0.35rem;
+                border-radius: 0.25rem;
+            }
+        }
+    }
+
+    .right {
+        width: 50%;
+    }
+
+    .thumbnails {
+        header,
+        main,
+        footer {
+            flex: 1 0 auto;
+            min-width: 100%;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            clear: both;
+            display: block;
+            min-width: 100%;
+            padding-left: 0.1em;
+            padding-right: 0.1em;
+            @media screen and (min-width: 768px) {
+                padding: 0.25em 0.5em;
+            }
+        }
+
+        h1,
+        h3 {
+            border-bottom: 1px solid lightgray;
+        }
+
+        h3 {
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .list-unstyled {
+            display: flex;
+            flex-flow: row wrap;
+            font-size: 0;
+            list-style: none;
+            padding: 0.5vw;
+            li {
+                flex: auto;
+                margin: 0.5vw;
+                width: 200px;
+                a {
+                    border: 2px solid transparent;
+                    height: auto;
+                    width: 100%;
+                    img {
+                        height: auto;
+                        max-width: 100%;
+                        &:hover,
+                        :focus {
+                            border: 2px solid blue;
+                        }
+                    }
+                }
+            }
+        }
+
+        .img-devSample {
+            border: 1px solid black;
+            display: block;
+        }
+
+        code {
+            background-color: lightgray;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        footer {
+            background-color: lightgray;
+            color: black;
+        }
+    }
+}
