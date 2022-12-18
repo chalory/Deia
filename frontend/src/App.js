@@ -6,6 +6,7 @@ import Chapter from "./components/Chapter/Chapter";
 import Landing from "./routes/Landing/Landing.route";
 import Menu from "./routes/Menu/Menu.route";
 import Dyslexia from "./components/Dyslexia/Dyslexia";
+import Forum from "./routes/Forum/Forum.route";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />}></Route>
                     <Route path="/menu" element={<Menu />}></Route>
+                    <Route path="/forum" element={<Forum />}></Route>
                     <Route path="/chapters/:id" element={<Chapter />}></Route>
                     <Route path="/dyslexia/:id" element={<Dyslexia />}></Route>
                 </Routes>

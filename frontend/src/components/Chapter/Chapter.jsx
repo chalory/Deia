@@ -27,9 +27,9 @@ function Chapter() {
     };
 
     const chapterNum = CHAPTERS.indexOf(id.toLowerCase());
+    console.log(chapterNum);
     const prevChapterPath = chapterNum > 0 ? CHAPTERS[chapterNum - 1] : CHAPTERS[0];
-    const nextChapterPath =
-        chapterNum < CHAPTERS.length - 1 ? CHAPTERS[chapterNum + 1] : CHAPTERS[CHAPTERS.length];
+    const nextChapterPath = chapterNum + 1 === CHAPTERS.length ? CHAPTERS[0] : CHAPTERS[chapterNum];
 
     let [dataBackend, errors, verify] = useChapter(id);
     let data = dataBackend;
