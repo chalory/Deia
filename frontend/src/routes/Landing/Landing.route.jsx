@@ -36,9 +36,9 @@ const Landing = () => {
             <div className="name">
                 <span className="name__with">with</span>
                 <h1>Deia</h1>
-                <button className="login-btn" onClick={() => loginWithRedirect()}>
+                {/* <button className="login-btn" onClick={() => loginWithRedirect()}>
                     Log In
-                </button>
+                </button> */}
             </div>
         </div>
     );
