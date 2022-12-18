@@ -1,9 +1,11 @@
 .menu {
-    background: #333;
+    background: #131720;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10rem;
+    font-size: 1.4rem;
     /* link */
     /* =============================================================================== */
     .link {
@@ -14,8 +16,6 @@
         color: var(--color);
         border-bottom: 1px solid var(--border-color);
 
-        font-size: 1.8rem;
-        font-weight: normal;
         text-decoration: none;
         letter-spacing: 0.2rem;
 
@@ -31,28 +31,22 @@
         border-color: currentColor;
     }
 
-    /* button */
-    /* most of the css is same as link, just for clear understanding of the code. */
-    /* =============================================================================== */
     .button {
+        width: 31rem;
+
         --color: hsl(140, 60%, 50%);
         --shadow: hsl(230, 5%, 66%);
         --border-color: hsl(230, 5%, 44%);
-
-        padding: 1.4rem 3.2rem;
+        padding: 1.4rem 2.5rem;
         border: 1px solid var(--border-color);
         border-radius: 100rem;
 
         color: var(--color);
         background: transparent;
-
-        font-family: inherit;
-        font-size: 1.8rem;
-        font-weight: normal;
+        font-size: 1.25rem;
         letter-spacing: 0.2rem;
 
         cursor: pointer;
-
         position: relative;
         transition: 0.4s;
     }

@@ -19,7 +19,8 @@ def chapters(id=None):
     if id is None and request.method == "GET":
         chapters_list = {}
         for key, value in all_chapters.items():
-            chapters_list[value.__class__.__name__] = key
+            name = value.description if value.description else value.__class__.__name__
+            chapters_list[name] = key
         return jsonify({"chapters": chapters_list})
     if not id in all_chapters.keys():
         message = {"type": "error", "messages": "Invalid chapter id"}

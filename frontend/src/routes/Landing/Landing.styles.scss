@@ -1,4 +1,115 @@
 .landing {
+    position: relative;
+    background: #131720;
+    min-height: 100vh;
+
+    .name {
+        color: #fff;
+        position: absolute;
+        font-size: 2rem;
+        z-index: 9;
+        font-weight: lighter;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 65%;
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 500;
+
+        &__with {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        animation-duration: 1.5s;
+        animation-name: animate-fade;
+        animation-delay: 10s;
+        animation-fill-mode: backwards;
+
+        .login-btn {
+            font-size: 1rem;
+            border: 2px solid #fff;
+            padding: 0.8rem 2.4rem;
+            border-radius: 100rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease-out;
+
+            &:hover {
+                background-color: #fff;
+                color: #000;
+            }
+        }
+    }
+
+    @keyframes animate-fade {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .accessibility {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 0%;
+            left: 50%;
+            border-bottom: 0.5vw solid #505;
+            transform: translate(-50%, 50%);
+            animation: lineGrow 1s, fadeOut 1s linear;
+            animation-delay: 1s, 8s;
+            animation-fill-mode: forwards;
+        }
+
+        &::after {
+            content: "";
+            font-size: 8vw;
+            font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
+            color: #909;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            animation: numberUpdate 5.5s steps(11, end), numbersUp 0.75s linear;
+            animation-delay: 2s, 9s;
+            animation-fill-mode: forwards;
+        }
+
+        span {
+            font-size: 8vw;
+            font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
+            color: #909;
+            display: inline-block;
+            overflow: hidden;
+            max-width: 8vw;
+        }
+
+        @for $i from 2 through 12 {
+            span:nth-child(#{$i}) {
+                animation: colorize 1s, fadeOut 1s linear, removeLetters 0.75s linear;
+                animation-delay: #{$i/2 + 1}s, 8s, 9s;
+                animation-fill-mode: forwards;
+            }
+        }
+
+        span:first-child,
+        span:last-child {
+            animation: addMargin 0.5s;
+            animation-delay: 9s;
+            animation-fill-mode: forwards;
+        }
+    }
+
     @keyframes colorize {
         0% {
             color: #909;
@@ -68,62 +179,184 @@
         }
     }
 
-    div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        white-space: nowrap;
+    // PARTICLES
+    /* Config */
+    $color-bg: #1e1e1e;
+    $color-particle: #fff;
+    $spacing: 2560px;
+    $time-1: 60s;
+    $time-2: 120s;
+    $time-3: 180s;
+    $time-4: 200s;
+
+    /* mixins */
+    @function particles($max) {
+        $val: 0px 0px $color-particle;
+        @for $i from 1 through $max {
+            $val: #{$val}, random($spacing) + px random($spacing) + px $color-particle;
+        }
+        @return $val;
     }
 
-    div::before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        width: 0%;
-        left: 50%;
-        border-bottom: 0.5vw solid #505;
-        transform: translate(-50%, 50%);
-        animation: lineGrow 1s, fadeOut 1s linear;
-        animation-delay: 1s, 8s;
-        animation-fill-mode: forwards;
+    @mixin particles($max) {
+        box-shadow: particles($max);
+        border-radius: 50%;
     }
 
-    div::after {
-        content: "";
-        font-size: 8vw;
-        font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
-        color: #909;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, 100%);
-        animation: numberUpdate 5.5s steps(11, end), numbersUp 0.75s linear;
-        animation-delay: 2s, 9s;
-        animation-fill-mode: forwards;
+    /* Styles */
+    html,
+    body {
+        height: 100%;
     }
 
-    span {
-        font-size: 8vw;
-        font-family: "Courier", "Courier New", "Courier New Sans", sans-serif;
-        color: #909;
-        display: inline-block;
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4rem;
         overflow: hidden;
-        max-width: 8vw;
     }
 
-    @for $i from 2 through 12 {
-        div span:nth-child(#{$i}) {
-            animation: colorize 1s, fadeOut 1s linear, removeLetters 0.75s linear;
-            animation-delay: #{$i/2 + 1}s, 8s, 9s;
-            animation-fill-mode: forwards;
+    .page-bg,
+    .animation-wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .page-bg {
+        background: $color-bg;
+        background-blend-mode: screen;
+        background-size: cover;
+        filter: grayscale(100%);
+        z-index: -1;
+    }
+
+    .particle,
+    .particle:after {
+        background: transparent;
+    }
+
+    .particle:after {
+        position: absolute;
+        content: "";
+        top: $spacing;
+    }
+
+    .particle-1 {
+        animation: animParticle $time-1 linear infinite;
+        @include particles(1000);
+        height: 2px;
+        width: 2px;
+    }
+
+    .particle-1:after {
+        @include particles(900);
+        height: 2px;
+        width: 2px;
+    }
+
+    .particle-2 {
+        animation: animParticle $time-2 linear infinite;
+        @include particles(800);
+        height: 2px;
+        width: 2px;
+    }
+
+    .particle-2:after {
+        @include particles(500);
+        height: 3px;
+        width: 3px;
+    }
+
+    .particle-3:after {
+        @include particles(1100);
+        height: 3px;
+        width: 3px;
+        border-radius: 50%;
+    }
+
+    .particle-4 {
+        animation: animParticle $time-4 linear infinite;
+        @include particles(1200);
+        height: 1px;
+        width: 1px;
+    }
+
+    .particle-4:after {
+        @include particles(700);
+        height: 1px;
+        width: 1px;
+    }
+
+    @keyframes animParticle {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY($spacing * -1);
         }
     }
 
-    div span:first-child,
-    div span:last-child {
-        animation: addMargin 0.5s;
-        animation-delay: 9s;
-        animation-fill-mode: forwards;
+    .page-wrapper {
+        text-align: center;
+        color: #fff;
+        z-index: 2;
+    }
+
+    h4 {
+        color: #fff;
+        font-family: Monoton;
+        -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+        -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+        animation: neon1 1.5s ease-in-out infinite alternate;
+    }
+
+    h4:hover {
+        color: #ff1177;
+        -webkit-animation: none;
+        -moz-animation: none;
+        animation: none;
+    }
+
+    /*glow for webkit*/
+
+    @-webkit-keyframes neon1 {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff1177,
+                0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 100px #ff1177, 0 0 150px #ff1177;
+        }
+        to {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff1177,
+                0 0 35px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 75px #ff1177;
+        }
+    }
+
+    /*glow for mozilla*/
+
+    @-moz-keyframes neon1 {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff1177,
+                0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 100px #ff1177, 0 0 150px #ff1177;
+        }
+        to {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff1177,
+                0 0 35px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 75px #ff1177;
+        }
+    }
+
+    /*glow*/
+
+    @keyframes neon1 {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff1177,
+                0 0 70px #ff1177, 0 0 80px #ff1177, 0 0 100px #ff1177, 0 0 150px #ff1177;
+        }
+        to {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff1177,
+                0 0 35px #ff1177, 0 0 40px #ff1177, 0 0 50px #ff1177, 0 0 75px #ff1177;
+        }
     }
 }

@@ -18,6 +18,28 @@ class Chapter:
         self.footer = """</body>
         </html>
         """
+        self.messages = []
+
+    def add_message(self, tag, message, type="error"):
+        self.messages.append(
+            {
+                "type": type,
+                "tag": tag.name,
+                "data": str(tag),
+                "location": {
+                    "line": tag.sourceline,
+                    "position": tag.sourcepos,
+                },
+                "message": message,
+            }
+        )
+
+    def get_response(self):
+        if len(self.messages) == 0:
+            return {
+                "type": "success",
+            }
+        return {"type": "error", "messages": self.messages}
 
     def get(self):
         return {
@@ -25,5 +47,5 @@ class Chapter:
             "code": self.header + self.code.strip() + self.footer,
         }
 
-    def verify(self, code: BeautifulSoup):
+    def verify(self, soup: BeautifulSoup, code: str):
         raise NotImplementedError

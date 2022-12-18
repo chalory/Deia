@@ -1,7 +1,5 @@
-import React from "react";
-import { useState } from "react";
-import { useMemo } from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 // There are some more ideas:
@@ -52,9 +50,8 @@ const generateLetters = letters =>
         return span;
     });
 
-const Letter = () => {
+const Letter = ({ value }) => {
     const refSpan = useRef();
-    const spanEl = refSpan.current;
 
     const id = 0 + 1;
     const randomArray = ["top", "bottom", "left", "right"];
@@ -76,36 +73,60 @@ const Letter = () => {
     const spanMoveHorizontal = `${direction + id * 3}px`;
     const spanMoveVertical = `${direction + id * 3}px`;
 
-    // setProperty(spanEl, "--r", spanRotation);
-    // setProperty(spanEl, "--m-h", spanMoveHorizontal);
-    // setProperty(spanEl, "--m-v", spanMoveVertical);
+    useEffect(() => {
+        const spanEl = refSpan.current;
+        setProperty(spanEl, "--r", spanRotation);
+        setProperty(spanEl, "--m-h", spanMoveHorizontal);
+        setProperty(spanEl, "--m-v", spanMoveVertical);
+    }, [refSpan.current]);
 
     return (
-        <span ref={refSpan} className="letter">
-            x
+        <span
+            className="letter"
+            ref={refSpan}
+            // style={{
+            //     transform: `rotate(3deg)  translate(${spanMoveHorizontal}, ${spanMoveVertical})`,
+            // }}
+        >
+            {value}
         </span>
     );
 };
 
 const Menu = () => {
-    const linkText = "As Button";
-    const letters = linkText.split("");
+    const linkText1 = "Basic Accessibility";
+    const letters1 = linkText1.split("");
 
-    const letterElements = useMemo(() => generateLetters(letters), []);
+    const linkText2 = "Dyslexia-Friendly Accessibility";
+    const letters2 = linkText2.split("");
 
-    console.log(letterElements);
+    // const letterElements = useMemo(() => generateLetters(letters), []);
 
     return (
         <section className="menu">
-            <div className="container">
-                <a className="link" href="#" target="_blank">
-                    <span className="shadow">{linkText}</span>
+            <div className="menu__link">
+                <Link to="/chapters/lesson1" className="button">
+                    <span className="shadow">{linkText1}</span>
                     <span className="clone" hidden>
                         <Letter />
-                        {letters.length > 0 &&
-                            letterElements.map((el, index) => <div key={index}></div>)}
+                        {letters1.length > 0 &&
+                            letters1.map((letter, index) => (
+                                <Letter key={letter + index} value={letter} />
+                            ))}
                     </span>
-                </a>
+                </Link>
+            </div>
+            <div className="menu__link">
+                <Link to="/dyslexia/dyslexia1" className="button">
+                    <span className="shadow">{linkText2}</span>
+                    <span className="clone" hidden>
+                        <Letter />
+                        {letters2.length > 0 &&
+                            letters2.map((letter, index) => (
+                                <Letter key={letter + index} value={letter} />
+                            ))}
+                    </span>
+                </Link>
             </div>
         </section>
     );

@@ -33,7 +33,7 @@ function IdeWrapper({ initialCode, errors, updateErrors }) {
     return (
         <div className="flex  flex-col items-stretch gap-4 h-full">
             {" "}
-            <div className="flex justify-end align-bottom gap-2" mb-2>
+            <div className="flex justify-end align-bottom gap-2 mb-2">
                 {updateErrors && (
                     <button
                         onClick={e => updateErrors(code)}

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import useChapter from "../../hooks/useChapter";
@@ -15,8 +17,7 @@ import { RiArrowGoBackLine } from "react-icons/ri";
 import "./Chapter.styles.scss";
 import { useState } from "react";
 
-const CHAPTERS = ["lesson1", "lesson2", "getlink", "getalttext"];
-// eslint-disable-next-line
+const CHAPTERS = ["lesson1", "getlink", "lesson2", , "getalttext"];
 function Chapter() {
     let { id } = useParams();
     const [isToggle, setIsToggle] = useState(false);
@@ -34,7 +35,6 @@ function Chapter() {
     let data = dataBackend;
 
     if (data.prompt === "Loading" && data.code === "Loading") {
-        console.log("in");
         if (id === "lesson1") {
             data = {
                 prompt: "",
@@ -42,7 +42,6 @@ function Chapter() {
             };
             data.prompt = (
                 <div>
-                    {" "}
                     <div className="pt-10">
                         A person is said to be disabled when they&apos;re faced with a condition -
                         permanent or temporary - that makes it difficult or impossible for them to
@@ -88,14 +87,207 @@ function Chapter() {
                 code: "",
             };
             data.prompt = (
-                <p>
-                    A person is said to be disabled when they&apos;re faced with a condition -
-                    permanent or temporary - that makes it difficult or impossible for them to
-                    achieve a desired task. In effect, web accessibility involves removing all
-                    barriers that prevent any users from accessing the web equally.
-                    <br />
-                    <img className="w-9/12 pt-15" src={picture}></img>
-                </p>
+                <div className="thumbnails">
+                    <header>
+                        <h1>Accessible Image Thumbnails</h1>
+                    </header>
+                    <main>
+                        <h2>Gallery of Images: Happy People from Our Company Event</h2>
+                        <p>
+                            Developer: Put explicit user instructions here, such as: "click a
+                            thumbnail to download images" or "click an image thumbnail to view image
+                            options."
+                        </p>
+                        <ul className="list-unstyled" role="group">
+                            <li>
+                                <a href="#">
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images.jpg"
+                                        alt="thumbnail of photo 001 from Our Company Event"
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="thumbnail of photo 002 from Our Company Event"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(8).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="thumbnail of photo 003 from Our Company Event"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(2).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(3).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(4).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(5).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(6).jpg"
+                                        alt=""
+                                        role="presentation"
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(7).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="#"
+                                    aria-label="group photo from Our Company Event, click to download"
+                                >
+                                    <img
+                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/images%20(1).jpg"
+                                        alt=""
+                                        className="thumbnail"
+                                    />
+                                </a>
+                            </li>
+                        </ul>
+                        <section>
+                            <h3>developer notes</h3>
+                            <ol>
+                                <li>
+                                    by using the UL/LI html structure, these items have been grouped
+                                    properly. If another HTML structure was used, additional roles
+                                    would need to be added.
+                                </li>
+                                <li>
+                                    I have not used the 'title' attribute here, because 'title' has
+                                    spotty support with assistive technology(AT).
+                                </li>
+                                <li>
+                                    While testing with NVDA + Firefox on Windows, I see that two
+                                    different methods seem to mostly convey the same information:
+                                    <ul>
+                                        <li>
+                                            Method One:
+                                            <ul>
+                                                <li>
+                                                    Add <code>aria-label</code> on the link, leaving
+                                                    the image alt blank and adding{" "}
+                                                    <code>role="presentation"</code> to the img
+                                                    element.
+                                                </li>
+                                                <li>
+                                                    Screenshot of how this reads out on NVDA +
+                                                    Firefox (Windows) for the first image:
+                                                    <img
+                                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/graphic-link.png"
+                                                        alt="thumbnail of photo 001 from our company event graphic link"
+                                                        className="img-devSample"
+                                                    />
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Method Two:
+                                            <ul>
+                                                <li>
+                                                    Add all of the information to the image's alt
+                                                    tag.
+                                                </li>
+                                                <li>
+                                                    Screenshot of this method on the second image:
+                                                    <img
+                                                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45544/just-link.png"
+                                                        alt="thumbnail of photo 002 from our company event link"
+                                                        className="img-devSample"
+                                                    />
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    This example assumes the following:
+                                    <ul>
+                                        <li>
+                                            The aria-label/alt text will be dynamically generated
+                                            and added with some sort of concatenated string.
+                                        </li>
+                                        <li>
+                                            the images will have been batch processed for
+                                            consistency
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </section>
+                    </main>
+                    <footer>
+                        <p>
+                            <small>
+                                Images found by searching Google for "happy people" and filtering
+                                for medium images, labeled for reuse. More Questions? Comment here
+                                or ask me{" "}
+                                <a href="https://twitter.com/melaniersumner"> on Twitter!</a>
+                            </small>
+                        </p>
+                    </footer>
+                </div>
             );
             verify = undefined;
         }
